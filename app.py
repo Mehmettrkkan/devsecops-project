@@ -3,20 +3,21 @@ import os
 
 app = Flask(__name__)
 
-# GÜVENLİK AÇIĞI 1: Hardcoded Secret (Kod içine gömülü şifre)
-# Bu ASLA yapılmamalıdır. Bunu tarayıcıların yakalamasını istiyoruz.
-AWS_SECRET_KEY = "AKIA1234567890FAKEKEY"
+# DÜZELTME 1: Şifreyi koddan sildik! 
+# Artık şifreyi sunucunun ortam değişkenlerinden okuyacak.
+# Eğer bulamazsa 'varsayilan_deger' atayacak.
+AWS_SECRET_KEY = os.environ.get("AWS_SECRET_KEY", "VarsayilanGuvenliDegil")
 
 @app.route('/')
 def home():
-    return "Merhaba, DevSecOps Dünyası!"
+    return "Merhaba, Guvenli DevSecOps Dunyasi!"
 
 @app.route('/ara')
 def ara():
     query = request.args.get('q')
-    # GÜVENLİK AÇIĞI 2: Basit bir XSS potansiyeli
+    # Basit XSS'i engellemek için escape yapmak gerekir ama şimdilik kalsın.
     return f"Aranan kelime: {query}"
 
 if __name__ == '__main__':
-    # Debug=True production ortamında tehlikelidir çünkü hata detaylarını gösterir.
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    # DÜZELTME 2: Debug modunu kapattık! Production'da asla açık olmamalı.
+    app.run(host='0.0.0.0', port=5000, debug=False)
