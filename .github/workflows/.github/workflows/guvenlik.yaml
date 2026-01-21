@@ -1,0 +1,27 @@
+# ... önceki adımlar ...
+
+      # ÖNCE: Docker Hub'a Giriş Yap
+      - name: Docker Hub Giris
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # SONRA: İmajı Derle ve Gönder (Sadece Main branch ise)
+      - name: Derle ve Docker Hub'a Gonder
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          # Etiket olarak hem 'latest' hem de commit ID'sini kullanıyoruz
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/devsecops-app:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/devsecops-app:${{ github.sha }}
+
+      # EN SON: Gönderilen İmajı Tekrar Tara (Opsiyonel ama havalı)
+      - name: Docker Hub Imajini Tara
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/devsecops-app:latest'
+          format: 'table'
+          severity: 'CRITICAL,HIGH'
