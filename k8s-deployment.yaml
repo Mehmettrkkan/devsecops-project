@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devsecops-deployment
+spec:
+  replicas: 2  
+  selector:
+    matchLabels:
+      app: benim-guvenli-uygulamam
+  template:
+    metadata:
+      labels:
+        app: benim-guvenli-uygulamam
+    spec:
+      containers:
+      - name: flask-app
+        image: mturkkan/devsecops-app:latest 
+        ports:
+        - containerPort: 5000
+        # Kubernetes'in imajı her zaman internetten çekmesini (güncellemesini) sağla:
+        imagePullPolicy: Always
