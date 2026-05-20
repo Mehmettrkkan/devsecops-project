@@ -1,0 +1,39 @@
+name: 2 - SAST (Static Code Analysis)
+
+on:
+  push:
+    branches: [ "main", "feature/*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  semgrep:
+    name: Semgrep Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep CI
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: "p/python" # Python tabanlı güvenlik kurallarını kullanır
+
+  bandit:
+    name: Bandit Python Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install Bandit
+        run: pip install bandit
+
+      - name: Run Bandit Scan
+        # Sadece kaynak kodumuzun olduğu src klasörünü tarıyoruz
+        run: bandit -r src/
