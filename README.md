@@ -1,7 +1,7 @@
 <div align="center">
-
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:1a1f2e,100:0d1117&height=200&section=header&text=DevSecOps%20Pipeline&fontSize=52&fontColor=58a6ff&animation=fadeIn&fontAlignY=38&desc=Enterprise-Grade%20CI/CD%20%26%20Security%20Automation&descAlignY=58&descColor=8b949e" width="100%"/>
-
+<br/>
+  
 <br/>
 
 [![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/features/actions)
