@@ -409,9 +409,9 @@ def search():
 ## 📊 Pipeline Akış Diyagramı
 
 ```
-git push
-    │
-    ▼
+             git push
+                │
+                ▼
 ┌─────────────────────────────────┐
 │   Trigger: push / pull_request  │
 └────────────────┬────────────────┘
@@ -437,9 +437,12 @@ git push
    │         │
  PASS       FAIL
    │         │
-   ▼         ▼
-┌──────────────────┐  ❌ Pipeline
-│  Container Scan  │     STOP
+   │         ▼
+   │      ❌ Pipeline
+   │         STOP
+   ▼     
+┌──────────────────┐  
+│  Container Scan  │     
 │  (Trivy + Syft)  │
 └────────┬─────────┘
          │
