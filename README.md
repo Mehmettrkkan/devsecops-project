@@ -3,6 +3,9 @@
 
 <br/>
 
+
+
+# 🛡️ DevSecOps Pipeline Project
 [![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/features/actions)
 [![Security: Trivy](https://img.shields.io/badge/Security-Trivy-1904DA?style=for-the-badge&logo=aqua&logoColor=white)](https://trivy.dev)
 [![SAST: Semgrep](https://img.shields.io/badge/SAST-Semgrep-2B8CBE?style=for-the-badge&logo=semgrep&logoColor=white)](https://semgrep.dev)
@@ -10,8 +13,6 @@
 [![Container: Docker](https://img.shields.io/badge/Container-Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
 [![Infra: Terraform](https://img.shields.io/badge/Infra-Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://terraform.io)
 [![SBOM: Syft](https://img.shields.io/badge/SBOM-Syft-00ADD8?style=for-the-badge&logo=anchore&logoColor=white)](https://github.com/anchore/syft)
-
-# 🛡️ DevSecOps Pipeline Project
 
 <br/>
 
