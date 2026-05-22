@@ -1,7 +1,6 @@
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:1a1f2e,100:0d1117&height=200&section=header&text=DevSecOps%20Pipeline&fontSize=52&fontColor=58a6ff&animation=fadeIn&fontAlignY=38&desc=Enterprise-Grade%20CI/CD%20%26%20Security%20Automation&descAlignY=58&descColor=8b949e" width="100%"/>
-<br/>
-  
+
+
 <br/>
 
 [![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/features/actions)
@@ -12,6 +11,8 @@
 [![Infra: Terraform](https://img.shields.io/badge/Infra-Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://terraform.io)
 [![SBOM: Syft](https://img.shields.io/badge/SBOM-Syft-00ADD8?style=for-the-badge&logo=anchore&logoColor=white)](https://github.com/anchore/syft)
 
+# 🛡️ DevSecOps Pipeline Project
+
 <br/>
 
 > **"Security is not a feature — it's a foundation."**  
@@ -21,6 +22,7 @@
 
 </div>
 
+---
 
 ## 🎯 Proje Hakkında
 
@@ -134,7 +136,7 @@ Her `git push` ve `pull request` işleminde pipeline otomatik olarak tetiklenere
 | Generic Secrets | `password = "abc123"` | ❌ Pipeline durdurulur |
 | Şifreli/Base64 | Şüpheli string desenleri | ⚠️ Uyarı üretilir |
 
-> **Tip:** Gitleaks, yalnızca güncel kodu değil, **tüm git geçmişini** tarar. Yanlışlıkla commit'lenen bir secret, sonraki commit'te silinse bile tespit edilir.
+> **Pro Tip:** Gitleaks, yalnızca güncel kodu değil, **tüm git geçmişini** tarar. Yanlışlıkla commit'lenen bir secret, sonraki commit'te silinse bile tespit edilir.
 
 ---
 
@@ -323,75 +325,6 @@ spec:
 | **Application** | Python / Flask | 3.11 / 3.x | Backend API |
 
 </div>
-
----
-
-## 🚀 Yerel Ortamda Çalıştırma
-
-### Ön Gereksinimler
-
-```bash
-# Gerekli araçların kurulumu (macOS)
-brew install docker gitleaks trivy syft checkov semgrep
-
-# Gerekli araçların kurulumu (Ubuntu/Debian)
-sudo apt-get install docker.io
-pip install semgrep bandit checkov
-```
-
-### 1. Repoyu Klonla
-
-```bash
-git clone https://github.com/<kullanici-adin>/<repo-adi>.git
-cd <repo-adi>
-```
-
-### 2. Uygulamayı Yerel Çalıştır
-
-```bash
-# Python ortamı kur
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-
-# Uygulamayı başlat
-python src/app.py
-# ➜ http://localhost:5000
-```
-
-### 3. Docker ile Çalıştır
-
-```bash
-# İmajı build et
-docker build -t devsecops-app:local .
-
-# Container'ı başlat
-docker run -p 5000:5000 devsecops-app:local
-
-# ➜ http://localhost:5000
-```
-
-### 4. Manuel Güvenlik Taramaları
-
-```bash
-# Secret taraması
-gitleaks detect --source . -v
-
-# SAST — Semgrep
-semgrep --config "p/python" src/
-
-# SAST — Bandit
-bandit -r src/ -f txt
-
-# Container zafiyet taraması
-trivy image devsecops-app:local
-
-# SBOM üretimi
-syft devsecops-app:local -o spdx-json > sbom.spdx.json
-
-# IaC güvenlik taraması
-checkov -d infra/ --framework kubernetes,terraform
-```
 
 ---
 
