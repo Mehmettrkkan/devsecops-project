@@ -1,0 +1,25 @@
+name: 4 - IaC Security Scan (Checkov)
+
+on:
+  push:
+    branches: [ "main", "feature/*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  checkov-scan:
+    name: Run Checkov IaC Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          # Sadece altyapı kodlarımızın olduğu klasörü tarıyoruz
+          directory: infra/ 
+          # Hangi altyapı araçlarını kullandığımızı belirtiyoruz
+          framework: kubernetes,terraform
+          # Kritik veya Yüksek bir hata bulursa pipeline'ı acımadan durdur
+          soft_fail: false
