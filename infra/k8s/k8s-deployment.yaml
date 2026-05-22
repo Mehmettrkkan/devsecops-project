@@ -2,8 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: devsecops-deployment
+  namespace: default
+  labels:
+    app: benim-guvenli-uygulamam
 spec:
-  replicas: 2  
+  replicas: 2
   selector:
     matchLabels:
       app: benim-guvenli-uygulamam
@@ -12,10 +15,29 @@ spec:
       labels:
         app: benim-guvenli-uygulamam
     spec:
+      # Pod Seviyesi Güvenlik (Root dışı kullanıcı ataması)
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
       containers:
       - name: flask-app
-        image: mturkkan/devsecops-app:latest 
+        image: mturkkan/devsecops-app:v1.0.0 
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
-        # Kubernetes'in imajı her zaman internetten çekmesini (güncellemesini) sağla:
-        imagePullPolicy: Always
+        # Kaynak Limitleri
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        # Konteyner Seviyesi Güvenlik
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+              - ALL
